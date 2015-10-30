@@ -1,0 +1,24 @@
+{
+
+"images": [
+    "rockman.png"
+],
+
+"frames": [
+    [1, 1, 30, 36, 0, 0, 0],
+    [32, 1, 31, 36, 0, 0, 0],
+    [64, 1, 30, 36, 0, 0, 0]
+],
+
+"animations": {
+    "normal": [0],
+    "shot1": [1],
+    "shot2": [2]
+},
+
+"texturepacker": [
+        "SmartUpdateHash: $TexturePacker:SmartUpdate:1ce09628b0cd10629b948bbc9d410325:07b9105ae64b9017d3c71a2dd55c980a:b756eae8ce933d5f78e4c2e69d193081$",
+        "Created with TexturePacker (https://www.codeandweb.com/texturepacker) for EaselJS"
+]
+
+}

@@ -1,0 +1,9 @@
+html {
+  background-color: #000;
+}
+
+canvas {
+  background-color: #57c2de;
+  width: 512px;
+  height: 448px;
+}

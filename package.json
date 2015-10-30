@@ -1,0 +1,16 @@
+{
+  "name": "attack",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build:js": "browserify src/app.js -t babelify -o public/js/bundle.js",
+    "watch": "watchify -d src/app.js -t babelify -o public/js/bundle.js"
+  },
+  "author": "sawa-zen <sawadasuiren@gmail.com> (http://sawa-zen.com/)",
+  "license": "ISC",
+  "devDependencies": {
+    "browserify": "^12.0.1",
+    "typescript": "^1.6.2"
+  }
+}
