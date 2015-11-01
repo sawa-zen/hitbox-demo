@@ -1,10 +1,15 @@
+import Shot from './Shot';
+import ShotLayer from '../ShotLayer';
+
 export default class Rockman extends createjs.Sprite {
 
   constructor() {
     super();
 
     //オーディオファイルを登録
-    createjs.Sound.registerSound( {id: "shot", src: "sound/shot.mp3"} );
+    createjs.Sound.registerSound({
+      id: "shot", src: "sound/shot.mp3"
+    });
 
     // スプライトシート作成
     var spriteSheet = new createjs.SpriteSheet({
@@ -26,16 +31,27 @@ export default class Rockman extends createjs.Sprite {
         }
       }
     });
+
     this.initialize(spriteSheet, 'normal');
     this.regY = 36;
     this.play();
   }
 
+  culcShotStartPos() {
+    return {x: this.x + 33, y: this.y - 19};
+  }
+
   shot() {
     this.gotoAndPlay('shot');
+
+    // shot音を再生
     var shotSound = createjs.Sound.createInstance('shot');
     shotSound.volume = 0.2;
     shotSound.play();
+
+    var shotLayer = new ShotLayer();
+    var startPos = this.culcShotStartPos();
+    shotLayer.addShot(new Shot(startPos.x, startPos.y));
   }
 
 }

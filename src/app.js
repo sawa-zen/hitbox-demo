@@ -1,4 +1,5 @@
 import Rockman from './view/Rockman.js';
+import ShotLayer from './ShotLayer.js';
 
 class App {
 
@@ -28,6 +29,10 @@ class App {
     shape.y = this._rockman.y;
     this._stage.addChild(shape);
     shape.on('click', _.bind(this.shapeClickHandler, this));
+
+    // 弾管理レイヤー
+    var shotLayer = new ShotLayer();
+    this._stage.addChild(shotLayer);
 
     // ticker
     createjs.Ticker.setFPS(60);
