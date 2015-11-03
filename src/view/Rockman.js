@@ -34,6 +34,7 @@ export default class Rockman extends createjs.Sprite {
 
     this.initialize(spriteSheet, 'normal');
     this.regY = 36;
+    this.isJumping = false;
     this.play();
   }
 
@@ -55,6 +56,18 @@ export default class Rockman extends createjs.Sprite {
     var shotLayer = new ShotLayer();
     var startPos = this.culcShotStartPos();
     shotLayer.addShot(new Shot(startPos.x, startPos.y + shotShake));
+  }
+
+  jump() {
+    console.info("jump");
+    // ジャンプ中であれば無視
+    if(this.isJumping) { return; }
+
+    this.isJumping = true;
+    createjs.Tween.get(this)
+      .to({y: this.y - 50}, 250, createjs.Ease.quadOut)
+      .to({y: this.y}, 250, createjs.Ease.quadIn)
+      .call(function() { this.isJumping = false; }, this);
   }
 
 }
