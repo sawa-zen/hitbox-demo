@@ -38,7 +38,7 @@ export default class Rockman extends createjs.Sprite {
   }
 
   culcShotStartPos() {
-    return {x: this.x + 33, y: this.y - 19};
+    return {x: this.x + 33, y: this.y - 20};
   }
 
   shot() {
@@ -49,9 +49,12 @@ export default class Rockman extends createjs.Sprite {
     shotSound.volume = 0.2;
     shotSound.play();
 
+    // 手ブレ
+    var shotShake = Math.floor( Math.random() * (3 - 1 + 1) ) + 1;
+
     var shotLayer = new ShotLayer();
     var startPos = this.culcShotStartPos();
-    shotLayer.addShot(new Shot(startPos.x, startPos.y));
+    shotLayer.addShot(new Shot(startPos.x, startPos.y + shotShake));
   }
 
 }
