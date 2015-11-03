@@ -14,6 +14,7 @@ class App {
 
     // stageのセット
     this._stage = new createjs.Stage('app');
+    createjs.Touch.enable(this._stage);
 
     // ロックマン
     this._rockman = new Rockman();
@@ -28,7 +29,7 @@ class App {
     shape.graphics.endFill();
     shape.y = this._rockman.y;
     this._stage.addChild(shape);
-    shape.on('click', _.bind(this.shapeClickHandler, this));
+    shape.on('mousedown', _.bind(this.shapeClickHandler, this));
 
     // 弾管理レイヤー
     var shotLayer = new ShotLayer();

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <title>ロックマンVim</title>
 <meta content="" name="description">
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=512,maximum-scale=1,user-scalable=no">
 <!-- font-->
 <link href="http://fonts.googleapis.com/css?family=Marck+Script" rel="stylesheet" type="text/css">
 <!-- CSS-->
@@ -12,6 +12,13 @@
 <!-- JS-->
 <script src="//code.createjs.com/createjs-2015.05.21.combined.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+<script>
+    document.addEventListener('touchmove', function(e) {
+        if (window.innerHeight >= document.body.scrollHeight) {
+            e.preventDefault();
+        }
+    }, false);
+</script>
 </head>
 <body>
   <canvas id="app" width="256" height="224">canvasの使えるブラウザで見てね</canvas>
