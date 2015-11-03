@@ -26,7 +26,7 @@ class App {
     // 敵
     this._enemy = new Enemy();
     this._enemy.x = 230;
-    this._enemy.y = 180;
+    this._enemy.y = 194;
     this._stage.addChild(this._enemy);
 
 
@@ -50,19 +50,6 @@ class App {
     // キーボード入力の監視
     document.onkeydown = _.bind(this.keyDownHandler, this);
 
-    document.getElementById('app').onmousemove = (e) => {
-
-      var pt = this._stage.localToLocal(e.pageX * 2, e.pageY * 2, this._enemy);
-
-      console.info(this._enemy.hitTest(e.pageX, e.pageY));
-      console.info('pt.x: ', pt.x);
-      console.info('pt.y: ', pt.y);
-
-      if(this._enemy.hitTest(pt.x, pt.y)) {
-        this._enemy.hit();
-      }
-    };
-
   }
 
   shapeClickHandler() {
@@ -73,19 +60,17 @@ class App {
 
     _.each(this._shotLayer.shotList, _.bind(function(shot) {
       var pt = this._stage.localToLocal(shot.x, shot.y, this._enemy);
-
-      console.info('pt.x: ', pt.x);
-      console.info('pt.y: ', pt.y);
-
       if(this._enemy.hitTest(pt.x, pt.y)) {
         this._enemy.hit();
+        this._shotLayer.removeShot(shot);
       }
     }, this));
     this._stage.update();
   }
 
   keyDownHandler(e) {
-      if(e.keyCode === 32) { this._rockman.shot(); }
+      if(e.keyCode === 76) { this._rockman.shot(); }
+      if(e.keyCode === 32) { this._rockman.jump(); }
   }
 
 }
