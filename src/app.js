@@ -30,14 +30,24 @@ class App {
     this._stage.addChild(this._enemy);
 
 
-    // 床
+    // 床１
     var shape = new createjs.Shape();
     shape.graphics.beginFill("#CCC");
-    shape.graphics.drawRect(0, 0, 256, 224);
+    shape.graphics.drawRect(0, 0, 128, 224);
     shape.graphics.endFill();
     shape.y = this._rockman.y;
     this._stage.addChild(shape);
     shape.on('mousedown', _.bind(this.shapeClickHandler, this));
+
+    // 床１
+    var shape2 = new createjs.Shape();
+    shape2.graphics.beginFill("#333");
+    shape2.graphics.drawRect(0, 0, 128, 224);
+    shape2.graphics.endFill();
+    shape2.x = 128;
+    shape2.y = this._rockman.y;
+    this._stage.addChild(shape2);
+    shape2.on('mousedown', _.bind(this.shape2ClickHandler, this));
 
     // 弾管理レイヤー
     this._shotLayer = new ShotLayer();
@@ -54,6 +64,10 @@ class App {
 
   shapeClickHandler() {
     this._rockman.shot();
+  }
+
+  shape2ClickHandler() {
+    this._rockman.jump();
   }
 
   tickHandler() {

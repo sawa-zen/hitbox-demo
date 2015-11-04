@@ -16,18 +16,40 @@ export default class Rockman extends createjs.Sprite {
       "framerate": 24,
       "images": ['/img/rockman.png'],
       "frames": [
-        [1, 1, 30, 36, 0, 0, 0],
-        [32, 1, 31, 36, 0, 0, 0],
-        [64, 1, 30, 36, 0, 0, 0]
+        [1, -1, 30, 36, 0, 0, 0],
+        [32, 1, 30, 36, 0, 0, 0],
+        [1, 38, 30, 36, 0, 0, 0],
+        [32, 38, 31, 36, 0, 0, 0],
+        [1, 75, 24, 39, 0, 0, 0],
+        [26, 75, 24, 40, 0, 0, 0],
+        [1, 116, 23, 43, 0, 0, 0],
+        [25, 116, 18, 43, 0, 0, 0],
+        [1, 160, 27, 44, 0, 0, 0],
+        [29, 160, 19, 46, 0, 0, 0]
       ],
       "animations": {
         "shot": {
-          "frames": [1, 2, 2],
+          "frames": [3, 1, 1],
           "next": "normal",
           "speed": 0.24
         },
         "normal": {
-          "frames": [0]
+          "frames": [2]
+        },
+        "jumpUp": {
+          "frames": [4, 7, 9],
+          "next": false,
+          "speed": 0.4
+        },
+        "jumpDown": {
+          "frames": [6, 8],
+          "next": false,
+          "speed": 0.4//0.24
+        },
+        "touchdown": {
+          "frames": [5, 0],
+          "next": "normal",
+          "speed": 0.5 //1
         }
       }
     });
@@ -43,6 +65,10 @@ export default class Rockman extends createjs.Sprite {
   }
 
   shot() {
+
+    // ジャンプ中は打たせない
+    if(this.isJumping) { return; }
+
     this.gotoAndPlay('shot');
 
     // shot音を再生
@@ -59,15 +85,22 @@ export default class Rockman extends createjs.Sprite {
   }
 
   jump() {
-    console.info("jump");
     // ジャンプ中であれば無視
     if(this.isJumping) { return; }
 
+    var jumpHeight = 70;
+    var speed = 300;
+
+    this.gotoAndPlay('jumpUp');
     this.isJumping = true;
     createjs.Tween.get(this)
-      .to({y: this.y - 50}, 250, createjs.Ease.quadOut)
-      .to({y: this.y}, 250, createjs.Ease.quadIn)
-      .call(function() { this.isJumping = false; }, this);
+      .to({y: this.y - jumpHeight}, speed, createjs.Ease.quadOut)
+      .call(this.gotoAndPlay, ['jumpDown'])
+      .to({y: this.y}, speed, createjs.Ease.quadIn)
+      .call(function() {
+        this.isJumping = false;
+        this.gotoAndPlay('touchdown');
+      }, this);
   }
 
 }
