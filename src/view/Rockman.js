@@ -11,11 +11,28 @@ export default class Rockman extends createjs.Sprite {
       id: "shot", src: "sound/shot.mp3"
     });
 
+
+    var frameW = 60;
+    var frames = [];
+    for(let y = 0; y < 2; y++) {
+      for(let x = 0; x < 7; x++) {
+        frames.push([
+          frameW * x,       // x
+          frameW * y + 1,   // y
+          frameW,           // width
+          frameW - 1,       // height
+          0,                // imageIndex
+          frameW / 2,       // regX
+          frameW - 1        // regY
+        ]);
+      }
+    }
+
     // スプライトシート作成
     var spriteSheet = new createjs.SpriteSheet({
       "framerate": 24,
       "images": ['/img/rockman.png'],
-      "frames": { 'width': 60, 'height': 60, 'regX': 30, 'regY': 60 },
+      "frames": frames,
       "animations": {
         "shot": {
           "frames": [2, 1, 1],
