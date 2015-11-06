@@ -19,7 +19,7 @@ class App {
 
     // ロックマン
     this._rockman = new Rockman();
-    this._rockman.x = 10;
+    this._rockman.x = 30;
     this._rockman.y = 194;
     this._stage.addChild(this._rockman);
 
